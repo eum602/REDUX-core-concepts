@@ -1,7 +1,7 @@
 const initialState =  {
     counter: 0
 }
-const reducer = (state,action) =>{//defining the reducer
+const reducer = (state=initialState,action) =>{//defining the reducer
     return state    
 }
 

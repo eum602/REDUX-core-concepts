@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-
+import {connect} from 'react-redux' //connect is a function that returns a 
+//HOC component
 import CounterControl from '../../components/CounterControl/CounterControl';
 import CounterOutput from '../../components/CounterOutput/CounterOutput';
 
@@ -28,7 +29,8 @@ class Counter extends Component {
     render () {
         return (
             <div>
-                <CounterOutput value={this.state.counter} />
+                <CounterOutput value={this.props.ctr} />{/***accessing the ctr prop because
+                of the connect -mapStateToProps configuration */}
                 <CounterControl label="Increment" clicked={() => this.counterChangedHandler( 'inc' )} />
                 <CounterControl label="Decrement" clicked={() => this.counterChangedHandler( 'dec' )}  />
                 <CounterControl label="Add 5" clicked={() => this.counterChangedHandler( 'add', 5 )}  />
@@ -36,6 +38,17 @@ class Counter extends Component {
             </div>
         );
     }
+    
+}
+//creatig a function after our class based component
+const mapStateToProps = state => {//how state managed by redux should be mapped to props 
+    //you can use in this container
+    //mapStateToProps is any name, it could be any other
+    //state: the state that comes from redux
+    return{
+        ctr:state.counter
+    }
 }
 
-export default Counter;
+export default connect(mapStateToProps)(Counter);/**connect(mapStateProps) will return a function
+to which we will pass our Counter component so that Counter can access the props setted on mapStatePops  */
