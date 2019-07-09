@@ -37,6 +37,28 @@ class Counter extends Component {
                 <CounterControl label="Decrement" clicked={this.props.onDecrementCounter}  />
                 <CounterControl label="Add 5" clicked={this.props.onAddCounter} />
                 <CounterControl label="Subtract 5" clicked={this.props.onSubtractCounter}/>
+                <hr/>
+                <button 
+                    style={{
+                        fontSize:'18px',                        
+                        backgroundColor:'#ccc', 
+                        padding:"10px",
+                        boxSizing:"border-box",
+                        color:"white",
+                        cursor:'pointer',
+                        border: '1px solid green',
+                        height:'50px'
+                    }} 
+                    onClick={this.props.onStoreResult}
+                >
+                    Store Result
+                </button>
+                <ul>
+                    {this.props.storedResults.map(strResult=>(
+                        <li key={strResult.id} onClick={this.props.onDeleteResult}>{strResult.value}</li>
+                    ))}
+                    
+                </ul>
             </div>
         );
     }
@@ -48,7 +70,8 @@ const mapStateToProps = state => {//how state managed by redux should be mapped 
     //mapStateToProps is any name, it could be any other
     //state: the state that comes from redux
     return{
-        ctr:state.counter
+        ctr:state.counter,
+        storedResults:state.results
     }
 }
 /** DISPATCH ACTIONS in your container*/
@@ -59,7 +82,9 @@ const mapDispatchToProps = dispatch => {//which kind of actions do I want to dis
         //component then 'onIncrement' will execute the dispatch
         onDecrementCounter:()=>dispatch({type:'DECREMENT'}),
         onAddCounter:()=>dispatch({type:'ADD',value:5}),
-        onSubtractCounter:()=>dispatch({type:'SUBTRACT',value:5})
+        onSubtractCounter:()=>dispatch({type:'SUBTRACT',value:5}),
+        onStoreResult:()=>dispatch({type:'STORE_RESULT'}),
+        onDeleteResult:()=>dispatch({type:'DELETE_RESULT'})
     }
 }
 
