@@ -29,6 +29,12 @@ const initialState = { //this can also be a number or whatever
     console.log(store.getState()) //will return undefined unless we initialize the state
 
 
+
+//Subscription
+    store.subscribe(()=>{
+        console.log('Subscription',store.getState()) //qe get informed each time a new dispatch is executed
+    })//we put Subscription before any dispatch, so subscription is triggered before any dispatch happens
+
 //Dispatching action
     store.dispatch({type: 'INC_COUNTER'}) //argument is a javascript object which represents the action
     //use UPPERCASE for type
@@ -37,8 +43,4 @@ const initialState = { //this can also be a number or whatever
     //or also you can add the payload:
     //store.disptach({type:'ADD_COUNTER',payload:{}})//payload is a javascript object
     store.dispatch({type: 'ADD_COUNTER',value:10})
-
     console.log(store.getState())
-
-
-//Subscription
