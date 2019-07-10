@@ -3,6 +3,7 @@ import {connect} from 'react-redux' //connect is a function that returns a
 //HOC component
 import CounterControl from '../../components/CounterControl/CounterControl';
 import CounterOutput from '../../components/CounterOutput/CounterOutput';
+import * as actionTypes from '../../Store/Actions'
 
 class Counter extends Component {
     state = {
@@ -90,13 +91,13 @@ const mapStateToProps = state => {//how state managed by redux should be mapped 
 const mapDispatchToProps = dispatch => {//which kind of actions do I want to dispatch on this container?
     //dispatch argument is a function 
     return {
-        onIncrementCounter: () => dispatch({type:'INCREMENT'}),//whenever we call "onIncrement" into this
+        onIncrementCounter: () => dispatch({type:actionTypes.INCREMENT}),//whenever we call "onIncrement" into this
         //component then 'onIncrement' will execute the dispatch
-        onDecrementCounter:()=>dispatch({type:'DECREMENT'}),
-        onAddCounter:()=>dispatch({type:'ADD',value:5}),
-        onSubtractCounter:()=>dispatch({type:'SUBTRACT',value:5}),
-        onStoreResult:()=>dispatch({type:'STORE_RESULT'}),
-        onDeleteResult:id=>dispatch({type:'DELETE_RESULT', resultElId:id})
+        onDecrementCounter:()=>dispatch({type:actionTypes.DECREMENT}),
+        onAddCounter:()=>dispatch({type:actionTypes.ADD,value:5}),
+        onSubtractCounter:()=>dispatch({type:actionTypes.SUBTRACT,value:5}),
+        onStoreResult:()=>dispatch({type:actionTypes.STORE_RESULT}),
+        onDeleteResult:id=>dispatch({type:actionTypes.DELETE_RESULT, resultElId:id})
     }
 }
 

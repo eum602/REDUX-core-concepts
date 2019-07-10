@@ -1,10 +1,11 @@
+import * as actionTypes from './Actions'
 const initialState =  {
     counter: 0,
     results:[]
 }
 const reducer = (state=initialState,action) =>{//defining the reducer
     switch(action.type){
-        case('INCREMENT'):
+        case(actionTypes.INCREMENT)://importing from file in orcer to avoid typo errors
             /**this SHOULD NEVER BE DONE:
              * const newState =  state
              * newState.counter = state.counter +1
@@ -22,24 +23,24 @@ const reducer = (state=initialState,action) =>{//defining the reducer
                 counter: state.counter + 1
             }
         
-        case('DECREMENT'):
+        case(actionTypes.DECREMENT):
             return {
                 ...state,
                 counter: state.counter - 1
             }
         
-        case('ADD'):
+        case(actionTypes.ADD):
             return {
                 ...state,
                 counter: state.counter + action.value
             }
         
-        case('SUBTRACT'):
+        case(actionTypes.SUBTRACT):
             return {
                 ...state,
                 counter: state.counter - action.value
             }
-        case('STORE_RESULT'):
+        case(actionTypes.STORE_RESULT):
             return{
                 ...state,
                 results: state.results.concat({id: new Date(),value:state.counter})
@@ -47,7 +48,7 @@ const reducer = (state=initialState,action) =>{//defining the reducer
                 //to do its work so this operates in an immutable way(not touchinh original object)
             }
 
-        case('DELETE_RESULT'):
+        case(actionTypes.DELETE_RESULT):
             //const id = 2
             // const newArray = [...state.results]//creates a true copy of the simple elements into the array
             // //but if they are objects then those elements will continue being pointers to
